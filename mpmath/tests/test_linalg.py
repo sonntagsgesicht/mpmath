@@ -346,3 +346,15 @@ def test_qr():
             n1 = norm(eye(m) - Q.conjugate() * Q.T)
             #print ' Norm of I - Q.conjugate() * Q.T = ', n1
             assert n1 <= maxnorm
+
+def test_rank():
+    assert rank(A1) == 3
+    assert rank(A2) == 4
+    assert rank(A3) == 5
+    assert rank(A4) == 5
+    assert rank(A5) == 3
+    assert rank(A6) == 3
+    assert rank(zeros(3)) == 0
+    assert rank(A11) == 2
+    assert rank(A1*A11) == 2
+    assert rank(A11*A11) == 2
