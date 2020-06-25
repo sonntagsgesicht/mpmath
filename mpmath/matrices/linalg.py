@@ -851,7 +851,7 @@ class LinearAlgebraMethods(object):
         # END OF FUNCTION QR
         # ------------------
 
-    def rank(ctx, A):
+    def rank(ctx, A, iszerofunc=None):
         """
             Calculate the rank of a matrix,
             i.e. the number of linear independent
@@ -900,8 +900,7 @@ class LinearAlgebraMethods(object):
             >>> rank(B)
             3
 
-
-
-
         """
-        return sum(1 for v in ctx.svd_r(A, compute_uv=False) if ctx.absmin(v) >= ctx.eps)
+        if iszerofunc is None:
+            iszerofunc = lambda v: ctx.absmin(v) < ctx.eps
+        return sum(1 for v in ctx.svd_r(A, compute_uv=False) if not iszerofunc(v))
